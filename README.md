@@ -1,5 +1,5 @@
 # Ultimate-Incremental
-
+play at https://yoreni.github.io/Ultimate-Incremental/index.html
 
 v?
 moved to java script to get rid of lag the game has lots alot of fetures 
