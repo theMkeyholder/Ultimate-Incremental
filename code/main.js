@@ -20,9 +20,6 @@ function makeGenerators()
 		
 }
 
-var gen1cost = new Decimal(20);
-var gen1amount = new Decimal(0);
-
 function buyGen(generator) //you can also make functions to take in varibles like this
 {
 	if(points.greaterThanOrEqualTo(generators[generator - 1].price)) //checks if player has enough
