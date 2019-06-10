@@ -2,8 +2,27 @@ var points = new Decimal(0); //this defines the players points use the "new Deci
 var pointsProduction = new Decimal(0);
 var pointsClick = new Decimal(1);
 
+var page = 0;
+
 var generators = [] //this is defining a list with nothing inside
 makeGenerators();
+
+var canvas = document.getElementById("buttonBackground");
+var ctx = canvas.getContext("2d");
+
+var vm = new Vue({
+  el: "#app",
+  data: 
+  {
+	  points: points,
+	  pointsProduction: pointsProduction,
+	  pointsClick: pointsClick,
+	  generators: generators,
+	  message: ""
+  }
+})
+vm.message = 'a'
+
 function makeGenerators()
 {
 	var prices = ["20","200","5000","2e4","1.25e5"] // this is define a list with 2 elements inside
@@ -18,6 +37,21 @@ function makeGenerators()
 		})
 	}
 		
+}
+
+document.addEventListener('keydown', move); //changes the generator the player wants to buy
+function move(e)
+{
+	key = e.keyCode;
+	if(key == 37) 
+	{
+		page--;
+		if(page == -1) page = generators.length - 1;
+	}
+	else if(key == 39) 
+	{
+		page = ((page + 1) % generators.length)
+	}
 }
 
 function buyGen(generator) //you can also make functions to take in varibles like this
@@ -36,11 +70,76 @@ function clickPoints()
 	points = points.add(1);
 }
 
+var app = new Vue({
+  el: '#app2',
+  data: {
+    message: 'Hello Vue!' + points
+  }
+})
+/*
+var app2 = new Vue({
+  el: '#app-2',
+  data: {
+    message: 'You loaded this page on ' + new Date().toLocaleString()
+  }
+})
+
+var app3 = new Vue({
+  el: '#app-3',
+  data: {
+    seen: false
+  }
+})
+
+var app4 = new Vue({
+  el: '#app-4',
+  data: {
+    todos: [
+      { text: 'Learn JavaScript' },
+      { text: 'Learn Vue' },
+      { text: 'Build something awesome' }
+    ]
+  }
+})
+
+var app5 = new Vue({
+  el: '#app-5',
+  data: {
+    message: 'Hello Vue.js!'
+  },
+  methods: {
+    reverseMessage: function () {
+      this.message = this.message.split('').reverse().join('')
+    }
+  }
+})
+
+var app6 = new Vue({
+  el: '#app-6',
+  data: {
+    message: 'Hello Vue!'
+  }
+})
+
+Vue.component('todo-item', {
+  props: ['todo'],
+  template: '<li>{{ todo.text }}</li>'
+})*/
+
 function gameLoop()
 {
 	points = points.add(pointsProduction)
 	document.getElementById("points").innerHTML = "Points:" + points;
-	document.getElementById("gen 1 info").innerHTML = "Cost: " + generators[0].price + " points You own " + generators[0].amount + " of these";
-	document.getElementById("gen 2 info").innerHTML = "Cost: " + generators[1].price + " points You own " + generators[1].amount + " of these";
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	
+	ctx.font = "16px Arial";
+	ctx.fillStyle = "#000000";
+	ctx.fillText("generator " + (page + 1),0,20);
+	ctx.fillText("You own " +  generators[page].amount,0,40);
+	ctx.fillText("Cost: " +  generators[page].price,0,60);
+	
+	document.getElementById("genName").innerHTML = "generator " + page;
+	document.getElementById("genOwned").innerHTML = "You own " +  generators[page].amount;
+	document.getElementById("genPrice").innerHTML = "Cost: " +  generators[page].price;
 }
 setInterval(gameLoop,100);
