@@ -6,8 +6,8 @@ var generators = [] //this is defining a list with nothing inside
 makeGenerators();
 function makeGenerators()
 {
-	var prices = ["20","200"] // this is define a list with 2 elements inside
-	var production = ["0.1","1.5"]
+	var prices = ["20","200","5000","2e4","1.25e5"] // this is define a list with 2 elements inside
+	var production = ["0.1","1.5","9","30","75"]
 	for(var a = 0 ; a < prices.length ; a = a + 1) //this is a for loop think of it like the repeat block in scratch
 	{
 		generators.push //push justs adds an item on to a list
