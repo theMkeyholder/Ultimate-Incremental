@@ -11,7 +11,7 @@ Vue.component('generator', {
   },
   template:
   `<div>
-      <h4>generator {{ page }}</h4>
+      <h4>Generator {{ page }}</h4>
       <span class="generator-amount">You own {{ generator.amount }}.</span>
       <span class="generator-cost">Cost: {{ generator.price }}</span>
       <button onclick="buyGen(page)">Buy</button>
